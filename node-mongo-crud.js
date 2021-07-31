@@ -1,4 +1,3 @@
-
 // node-mongo
 // node-mongo123456
 
@@ -33,6 +32,12 @@ MongoClient.connect(URL, (error, MongoClientConnection) => {
         // findLimit(MongoClientConnection);
 
         // findDataBySorting(MongoClientConnection);
+
+        // updateDataOne(MongoClientConnection);
+
+        // createCollection(MongoClientConnection);
+
+        deleteCollection(MongoClientConnection);
     }
 })
 
@@ -220,10 +225,51 @@ const findDataBySorting = (MongoClientConnection) => {
 }
 
 
-
 const updateDataOne = (MongoClientConnection) => {
 
+    const MyDataBaseConnection = MongoClientConnection.db("School");
+    const MyCollection = MyDataBaseConnection.collection("Students");
+
+    const updateName = { Roll: "02" }
+    const setUpdateName = { $set: { name: "SOWHAN", age: 200 } }
+
+    MyCollection.updateOne(updateName, setUpdateName, ((error, result) => {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log('Data UpdateSuccess')
+            console.log(result);
+        }
+    }))
+}
+
+const createCollection = (MongoClientConnection) => {
+
+    const MyDataBaseConnection = MongoClientConnection.db("School")
+
+    MyDataBaseConnection.createCollection('Teachers', (error) => {
+
+        if (error) {
+            console.log(error)
+        } else {
+            console.log('Collection Created Success');
+
+        }
+    });
+}
 
 
+const deleteCollection = (MongoClientConnection) => {
 
+    const MyDataBaseConnection = MongoClientConnection.db("School")
+
+    MyDataBaseConnection.dropCollection('Teachers', (error) => {
+
+        if (error) {
+            console.log(error)
+        } else {
+            console.log('Collection Delete Success');
+
+        }
+    });
 }
