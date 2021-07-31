@@ -23,7 +23,15 @@ MongoClient.connect(URL, (error, MongoClientConnection) => {
 
         // findSpecificElement(MongoClientConnection);
 
-        findAllItem(MongoClientConnection);
+        // findAllItem(MongoClientConnection);
+
+        // findProjection(MongoClientConnection);
+
+        // findItemQuery(MongoClientConnection);
+
+        // findLimit(MongoClientConnection);
+
+        // findDataBySorting(MongoClientConnection);
     }
 })
 
@@ -120,9 +128,7 @@ const findSpecificElement = (MongoClientConnection) => {
 }
 
 
-
 const findAllItem = (MongoClientConnection) => {
-
 
     const MyDataBaseConnection = MongoClientConnection.db("School");
 
@@ -135,4 +141,88 @@ const findAllItem = (MongoClientConnection) => {
             console.log(result)
         }
     })
+}
+
+
+const findProjection = (MongoClientConnection) => {
+
+    const MyDataBaseConnection = MongoClientConnection.db("School");
+    const MyCollection = MyDataBaseConnection.collection("Students");
+
+    const ItemObj = {};
+
+    const ItemProjection = { projection: { Roll: "" } }
+    MyCollection.find(ItemObj, ItemProjection).toArray((error, result) => {
+
+        if (error) {
+            console.log('Your Data Is Failed')
+        } else {
+            console.log(result)
+        }
+    })
+}
+
+
+const findItemQuery = (MongoClientConnection) => {
+
+    const MyDataBaseConnection = MongoClientConnection.db("School");
+
+    const MyCollection = MyDataBaseConnection.collection("Students");
+
+    const QueryItem = { name: "RUMI" }
+
+    MyCollection.find(QueryItem).toArray((error, result) => {
+
+        if (error) {
+            console.log(error)
+        } else {
+            console.log(result)
+        }
+    })
+}
+
+
+const findLimit = (MongoClientConnection) => {
+
+    const MyDataBaseConnection = MongoClientConnection.db("School");
+
+    const MyCollection = MyDataBaseConnection.collection("Students");
+
+    MyCollection.find().limit(6).toArray((error, result) => {
+
+        if (error) {
+            console.log(error)
+        } else {
+            console.log(result)
+        }
+    })
+}
+
+
+const findDataBySorting = (MongoClientConnection) => {
+
+    const MyDataBaseConnection = MongoClientConnection.db("School");
+
+    const MyCollection = MyDataBaseConnection.collection("Students");
+
+    // const sortingData = { Roll: 1 }
+    const sortingData = { Roll: -1 }
+
+    MyCollection.find().sort(sortingData).toArray((error, result) => {
+
+        if (error) {
+            console.log(error)
+        } else {
+            console.log(result)
+        }
+    })
+}
+
+
+
+const updateDataOne = (MongoClientConnection) => {
+
+
+
+
 }
