@@ -1,7 +1,3 @@
-// node-mongo
-// node-mongo123456
-
-
 const MongoClient = require('mongodb').MongoClient;
 
 const URL = "mongodb+srv://node-mongo:node-mongo123456@cluster0.buk2o.mongodb.net/?retryWrites=true&w=majority"
